@@ -1,27 +1,26 @@
-There are two ways to apply settings to the Slim application. First during Slim application instantiation and second
-after instantiation. All settings can be applied at instantiation time by passing Slim’s constructor an associative
-array. All settings can be retrieved and modified after instantiation, however some of them can not be done simply by
-using the config application instance method but will be demonstrated as necessary below. Before I list the available
-settings, I want to quickly explain how you may define and inspect settings with your Slim application.
+Slim应用的配置有两种方法：其一为在Slim应用初始化时配置参数，其二为Slim框架初始化完成后进行配置。
+所有的配置项都可以在Slim应用生成时通过关联数组向Slim的构造方法传递。
+所有的配置参数都可以在初始化之后进行修改，但是某些配置并不能简单地通过config方法完成，因而后面将有必要的说明。
+在我将所有可选的配置项列出之前，我希望快速地解释一下如何在你的Slim应用中定义和检查配置参数。
 
-### During Instantiation
+### 初始化过程中
 
-To define settings upon instantiation, pass an associative array into the Slim constructor.
+应用初始化过程中配置，只需要向Slim的构造器方法传递一个关联数组。
 
     <?php
     $app = new Slim(array(
         'debug' => true
     ));
 
-### After Instantiation
+### 初始化完成后
 
-To define settings after instantiation, the majority can use the config application instance method; the first
-argument is the setting name and the second argument is the setting value.
+应用初始化完成后配置，大部分的配置项可以通过使用应用实例的config方法：
+第一个参数是配置项的名称，第二个参数是配置项的值。
 
     <?php
     $app->config('debug', false);
 
-You may also define multiple settings at once using an associative array:
+你也可以通过使用关联数组一次性设定多种配置项。
 
     <?php
     $app->config(array(
@@ -29,10 +28,11 @@ You may also define multiple settings at once using an associative array:
         'templates.path' => '../templates'
     ));
 
-To retrieve the value of a setting, you also use the config application instance method; however, you only pass one
-argument - the name of the setting you wish to inspect. If the setting you request does not exist, `null` is returned.
+检查某个配置项的值，你也可以使用应用实例的config方法；
+这时你只需要向方法中传递你希望检查的配置项的名称即可。
+如果你所检查的配置项不存在，那么方法将会返回`null`。
 
     <?php
     $settingValue = $app->config('templates.path'); //returns "../templates"
 
-You are not limited to the settings shown below; you may also define your own.
+不仅仅局限于下面所说的配置项；你也可以定义自己的配置项。
